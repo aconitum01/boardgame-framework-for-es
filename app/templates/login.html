@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+label{
+  max-width: 400px;
+  margin: 10px auto;
+}
+button{
+  margin-top: 30px;
+}
+</style>
+{% endblock %}
+{% block content %}
+<h1>Hanabiアプリ<br>ログイン</h1>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<form method="POST">
+  <label for="username">ユーザー名: <input type="text" id="username" name="username" required></label>
+  <br>
+  <label for="password">パスワード: <input type="password" id="password" name="password" required></label>
+  <br>
+  <button type="submit">ログイン</button>
+</form>
+{% endblock %}
+

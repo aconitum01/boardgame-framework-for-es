@@ -1,0 +1,186 @@
+{
+  "name": "事前アンケート",
+  "questions": [
+    {
+      "id": "participate_real",
+      "type": "radio",
+      "text": "あなたは本実験が対面の場合でも参加してくれていましたか?",
+      "options": [
+        {
+          "value": "no",
+          "text": "参加しなかった"
+        },
+        {
+          "value": "yes",
+          "text": "参加した"
+        }
+      ]
+    },
+    {
+      "id": "reason_no_participate_real",
+      "trigger": {
+        "id": "participate_real",
+        "value": "no"
+      },
+      "type": "radio",
+      "text": "参加しない理由はなぜですか?",
+      "options": [
+        {
+          "value": "time",
+          "text": "時間がないから"
+        },
+        {
+          "value": "troublesome",
+          "text": "現地に集まるのが面倒だから"
+        },
+        {
+          "value": "other",
+          "text": "その他"
+        }
+      ],
+      "custom": {
+        "id": "reason_no_participate_real_other",
+        "trigger": {
+          "value": "other"
+        },
+        "type": "text",
+        "text": "その他の場合，理由を具体的に教えてください（特になければ「なし」と記入してください）。"
+      }
+    },
+    {
+      "id": "exp_bg",
+      "type": "radio",
+      "text": "ボードゲームやカードゲーム全般にどのくらい経験がありますか?",
+      "options": [
+        {
+          "value": "no_exp",
+          "text": "全く経験がない"
+        },
+        {
+          "value": "little_exp",
+          "text": "あまり経験がない"
+        },
+        {
+          "value": "neutral",
+          "text": "どちらともいえない"
+        },
+        {
+          "value": "some_exp",
+          "text": "ある程度経験がある"
+        },
+        {
+          "value": "high_exp",
+          "text": "非常に豊富な経験がある"
+        }
+      ]
+    },
+    {
+      "id": "exp_hanabi",
+      "type": "radio",
+      "trigger": {
+        "id": "exp_bg",
+        "value": [
+          "little_exp",
+          "neutral",
+          "some_exp",
+          "high_exp"
+        ]
+      },
+      "text": "ゲーム「Hanabi」の経験はありますか?",
+      "options": [
+        {
+          "value": "no_play",
+          "text": "未プレイ"
+        },
+        {
+          "value": "play_1_10",
+          "text": "1-10回"
+        },
+        {
+          "value": "play_10_30",
+          "text": "10-30回"
+        },
+        {
+          "value": "play_30_50",
+          "text": "30-50回"
+        },
+        {
+          "value": "play_50_up",
+          "text": "50回以上"
+        }
+      ]
+    },
+    {
+      "id": "last_play_hanabi",
+      "type": "radio",
+      "trigger": {
+        "id": "exp_hanabi",
+        "value": [
+          "play_1_10",
+          "play_10_30",
+          "play_30_50",
+          "play_50_up"
+        ]
+      },
+      "text": "最後にHanabiをプレイしたのはいつですか?",
+      "options": [
+        {
+          "value": "no_memory",
+          "text": "覚えていない"
+        },
+        {
+          "value": "over_year",
+          "text": "1年以上前"
+        },
+        {
+          "value": "three_months_year",
+          "text": "3か月から1年前"
+        },
+        {
+          "value": "within_three",
+          "text": "3か月以内"
+        }
+      ]
+    },
+    {
+      "id": "score_hanabi",
+      "type": "radio",
+      "trigger": {
+        "id": "exp_hanabi",
+        "value": [
+          "play_1_10",
+          "play_10_30",
+          "play_30_50",
+          "play_50_up"
+        ]
+      },
+      "text": "あなたのHanabi（25点満点）の平均スコアは?",
+      "options": [
+        {
+          "value": "no_memory",
+          "text": "覚えていない"
+        },
+        {
+          "value": "5_below",
+          "text": "5点以下"
+        },
+        {
+          "value": "6_10",
+          "text": "6-10"
+        },
+        {
+          "value": "11_15",
+          "text": "11-15"
+        },
+        {
+          "value": "16_20",
+          "text": "16-20"
+        },
+        {
+          "value": "21_up",
+          "text": "21点以上"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block head %}
+<script>
+  let valueStore = {};
+  document.addEventListener("DOMContentLoaded", () => {
+    document.forms[0].addEventListener("change", event => {
+      let field;
+      let customField;
+      {% for question in questions %}
+        {% if question.trigger %}
+          field = document.getElementById("{{ question.trigger.id }}");
+          if(field.style.display == "none"){
+            resetField("{{ question.id }}");
+          }else{
+            handleVisivility("{{ question.id }}",  "{{ question.trigger.id }}", {{ question.trigger.value | tojson }});
+          }
+        {% endif %}
+        {% if question.custom %}
+          field = document.getElementById("{{ question.id }}");
+          customField = document.getElementById("{{ question.custom.id }}");
+          if({{ question.custom.trigger.value | tojson }}.includes(getFieldsetValue(field))){
+            customField.style.display = "flex";
+            customField.style.flexDirection = "column";
+            customField.querySelector("input").setAttribute("required", "true");
+          }else{
+            customField.style.display = "none";
+            customField.querySelector("input").removeAttribute("required");
+          }
+        {% endif %}
+      {% endfor %}
+    });
+
+    const handleVisivility = (fieldId, triggerId, triggerValues) => {
+      const field = document.getElementById(fieldId);
+      const triggerField = document.getElementById(triggerId);
+      const eventValue = getFieldsetValue(triggerField);
+      if(triggerValues.includes(eventValue)){
+        field.style.display = "flex";
+        field.querySelectorAll(`[name=${fieldId}]`).forEach(element => {
+          if(valueStore[fieldId]){
+            if(element.tagName === "SELECT"){
+              element.value = valueStore[fieldId];
+            }else if(element.type === "radio" || element.type === "checkbox"){
+              element.checked = valueStore[fieldId][element.value];
+            }
+          }
+          element.setAttribute("required", "true");
+        });
+        delete valueStore[fieldId];
+      }else{
+        resetField(fieldId);
+      }
+    };
+
+    const resetField = (fieldId) => {
+      let field = document.getElementById(fieldId);
+      if(!field) return;
+      field.style.display = "none";
+      field.querySelectorAll(`[name=${fieldId}]`).forEach(element => {
+        if(element.tagName === "SELECT"){
+          valueStore[fieldId] = element.value;
+          element.value = "";
+        }else if(element.type === "radio" || element.type === "checkbox"){
+          if(!valueStore[fieldId]){
+            valueStore[fieldId] = {};
+          }
+          valueStore[fieldId][element.value] = element.checked;
+          element.checked = false;
+        }
+        element.removeAttribute("required");
+      });
+    };
+
+    const getFieldsetValue = (fieldset) => {
+      if (!fieldset) return null;
+
+      let value = null;
+      const inputs = fieldset.querySelectorAll("input, select, textarea");
+
+      inputs.forEach(input => {
+        if (input.type === "radio") {
+          if (input.checked) {
+            value = input.value;
+          }
+        } else if (input.tagName === "SELECT") {
+          value = input.value;
+        } else if (input.type === "checkbox") {
+          if (!value) value = [];
+          if (input.checked) {
+            value.push(input.value);
+          }
+        }
+      });
+      return value;
+    };
+  });
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>{{ survey_name }}</h1>
+<form method="POST">
+{% if game_id %}
+  <input type="hidden" name="game_id" value="{{ game_id }}"/>
+{% endif %}
+{% for question in questions %}
+  <fieldset id="{{ question.id }}" {% if question.trigger %}style="display:none"{% endif %}>
+    <legend>{{ question.text }}</legend>
+    {% if question.type == 'radio' %}
+      {% for option in question.options %}
+        <label><input type="radio" name="{{ question.id }}" value="{{ option.value }}" {% if not question.trigger %}required{% endif %}/>{{ option.text }}</label>
+      {% endfor %}
+    {% elif question.type == 'checkbox' %}
+      {% for option in question.options %}
+        <label><input type="checkbox" name="{{ question.id }}" value="{{ option.value }}" {% if not question.trigger %}required{% endif %}/>{{ option.text }}</label>
+      {% endfor %}
+    {% elif question.type == 'select' %}
+      <select name="{{ question.id }}">
+        <option value="" selected>選択してください．</option>
+        {% for option in question.options %}
+          <option value="{{ option.value }}">{{ option.text }}</option>
+        {% endfor %}
+      </select>
+    {% elif question.type == 'text' %}
+      <input type="text" name="{{ question.id }}" {% if not question.trigger %}required{% endif %} />
+    {% endif %}
+    {% if question.custom %}
+      <div id="{{ question.custom.id }}", {% if question.custom.trigger %}style="display:none"{% endif %}>
+        <label>{{ question.custom.text }}</label>
+        <input type="text" name="{{ question.custom.id }}"/>
+      </div>
+    {% endif %}
+  </fieldset>
+{% endfor %}
+<button type="submit">送信する</button>
+</form>
+{% endblock %}
+

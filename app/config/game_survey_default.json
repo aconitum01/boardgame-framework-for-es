@@ -1,0 +1,206 @@
+{
+  "name": "ゲーム毎アンケート",
+  "questions": [
+    {
+      "id": "game_enjoyment",
+      "type": "radio",
+      "text": "今回のゲームは楽しかったですか？",
+      "options": [
+        {
+          "value": "not_enjoyable",
+          "text": "全く楽しくなかった"
+        },
+        {
+          "value": "little_enjoyable",
+          "text": "あまり楽しくなかった"
+        },
+        {
+          "value": "neutral",
+          "text": "どちらともいえない"
+        },
+        {
+          "value": "some_enjoyable",
+          "text": "ある程度楽しかった"
+        },
+        {
+          "value": "very_enjoyable",
+          "text": "非常に楽しかった"
+        }
+      ]
+    },
+    {
+      "id": "useful_ai_hint",
+      "type": "radio",
+      "text": "このAIの出すヒントは有益でしたか？",
+      "options": [
+        {
+          "value": "not_useful",
+          "text": "全く有益ではなかった"
+        },
+        {
+          "value": "little_useful",
+          "text": "あまり有益ではなかった"
+        },
+        {
+          "value": "neutral",
+          "text": "どちらともいえない"
+        },
+        {
+          "value": "some_useful",
+          "text": "ある程度有益だった"
+        },
+        {
+          "value": "very_useful",
+          "text": "非常に有益だった"
+        }
+      ]
+    },
+    {
+      "id": "understanding_my_hint",
+      "type": "radio",
+      "text": " 自分の出したヒントを十分に理解して役立ててくれましたか？",
+      "options": [
+        {
+          "value": "not_helpful",
+          "text": "全く役立ててくれなかった"
+        },
+        {
+          "value": "little_helpful",
+          "text": "あまり役立ててくれなかった"
+        },
+        {
+          "value": "neutral",
+          "text": "どちらともいえない"
+        },
+        {
+          "value": "some_helpful",
+          "text": "ある程度役立ててくれた"
+        },
+        {
+          "value": "very_helpful",
+          "text": "十分に役立ててくれた"
+        }
+      ]
+    },
+    {
+      "id": "next_potential",
+      "type": "radio",
+      "text": "このAIと次にゲームをプレイしたとき，さらにスコアを伸ばせそうですか？",
+      "options": [
+        {
+          "value": "not_possible",
+          "text": "全く伸ばせそうにない"
+        },
+        {
+          "value": "little_possible",
+          "text": "あまり伸ばせそうにない"
+        },
+        {
+          "value": "neutral",
+          "text": "どちらともいえない"
+        },
+        {
+          "value": "some_possible",
+          "text": "ある程度伸ばせそう"
+        },
+        {
+          "value": "very_possible",
+          "text": "非常に伸ばせそう"
+        }
+      ]
+    },
+    {
+      "id": "ai_behavior_understanding",
+      "type": "radio",
+      "text": "このAIの挙動は読めましたか？",
+      "options": [
+        {
+          "value": "not_understood",
+          "text": "全く読めなかった"
+        },
+        {
+          "value": "little_understood",
+          "text": "あまり読めなかった"
+        },
+        {
+          "value": "neutral",
+          "text": "どちらともいえない"
+        },
+        {
+          "value": "some_understood",
+          "text": "ある程度読めた"
+        },
+        {
+          "value": "very_understood",
+          "text": "非常によく読めた"
+        }
+      ]
+    }
+  ],
+  "milestone_questions": {
+    "milestones": [
+      6
+    ],
+    "questions": [
+      {
+        "id": "ui_usability",
+        "type": "radio",
+        "text": "アプリのインターフェース（UI）の操作性はどう感じましたか？",
+        "options": [
+          {
+            "value": "very_difficult",
+            "text": "非常に使いにくい"
+          },
+          {
+            "value": "difficult",
+            "text": "やや使いにくい"
+          },
+          {
+            "value": "neutral",
+            "text": "どちらともいえない"
+          },
+          {
+            "value": "easy",
+            "text": "やや使いやすい"
+          },
+          {
+            "value": "very_easy",
+            "text": "非常に使いやすい"
+          }
+        ]
+      },
+      {
+        "id": "attention_maintenance",
+        "type": "radio",
+        "text": "あなたはここまでのゲーム中，集中力は維持できましたか？",
+        "options": [
+          {
+            "value": "not_maintained",
+            "text": "全く維持できなかった"
+          },
+          {
+            "value": "somewhat_not_maintained",
+            "text": "あまり維持できなかった"
+          },
+          {
+            "value": "neutral",
+            "text": "どちらともいえない"
+          },
+          {
+            "value": "somewhat_maintained",
+            "text": "ある程度維持できた"
+          },
+          {
+            "value": "fully_maintained",
+            "text": "完全に維持できた"
+          }
+        ]
+      },
+      {
+        "id": "app_improvement",
+        "type": "text",
+        "text": "アプリに改善してほしい点があれば自由に記入してください（AI以外。特になければ「なし」と記入ください。）"
+      }
+    ]
+  }
+}

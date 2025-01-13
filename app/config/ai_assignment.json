@@ -1,0 +1,9 @@
+{
+  "assignment_rules": [
+    {"agent_name":"InternalStateAgent", "count":3},
+    {"agent_name":"IntentionalAgent", "count":3}
+  ],
+  "random_assignable_agents":[
+    "InternalStateAgent", "IntentionalAgent"
+  ]
+}

@@ -1,0 +1,33 @@
+# Python related files
+**/__pycache__
+**/.pytest_cache
+*.py[cod]
+
+# Database files
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+.env/
+
+# environment file
+.env
+
+# Log files
+*.log
+
+# Instance files
+instance/
+
+# IDE/editor related files
+.vscode/
+*.swp
+hanabi-app.code-workspace
+
+# System files
+.DS_Store
+
+# keys
+cert.pem
+key.pem

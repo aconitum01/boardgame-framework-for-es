@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+  .flash-messages {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px 15px;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    list-style: none;
+  }
+
+  .flash-messages li {
+    margin: 5px 0;
+  }
+
+  .game-time {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .game-time span {
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  button.warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+
+  button.warning:hover {
+    background-color: #e0a800;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h1>Hanabiアプリへようこそ, {{ current_user.username }}!</h1>
+<div class="game-time">
+  <h2>ゲームプレイ時間: <span>{{ total_play_time | format_play_time }}</span></h2>
+</div>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% set ns = namespace(consent = false, pre_survey = false) %}
+{% if messages %}
+<ul class="flash-messages">
+  {% for category, message in messages %}
+  {% if category == 'consent' %}
+  {% set ns.consent = true %}
+  {% elif category == 'pre_survey' %}
+  {% set ns.pre_survey = true %}
+  {% endif %}
+  <li class="{{ category }}">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<button {% if ns.consent %}class="warning" {% endif %}
+  onclick="location.href='{{ url_for('consent.consent') }}'">実験説明</button>
+<button class="{% if ns.pre_survey %}warning{% endif %}"
+  onclick="location.href='{{ url_for('survey.pre_survey') }}'">事前アンケート</button>
+<button onclick="location.href='{{ url_for('game.game') }}'">ゲーム開始</button>
+
+<div class="caution">
+  <ul>
+    <li>異なるアルゴリズムで動作する2種類のAIがいます．それぞれ，alpha，betaで識別できます．</li>
+    <li>ゲーム開始を押しても画面が読み込まれなかった場合，ブラウザのリロードをお願いします．</li>
+    <li>【ご協力のお願い】基本自由な時間帯にプレイいただいて構いませんが，なるべく連続したゲームプレイをお願いします．</li>
+    <li>実施可能期間：12/18(水), 12/19(木), 12/20(金)</li>
+    <li>実施可能時間：午前の部：各日 9:00～12:30（ゲーム開始は12:00まで），午後の部：各日 13:30～17:30（ゲーム開始は17:00まで）</li>
+    <li>上記の期間中，ご自身の都合の良い日程・時間帯に自由にゲームプレイをお願いします．</li>
+    <li>【注】上記の期間中，「合計で最低2時間のゲームプレイ」という謝金給付条件があります．本条件が満たされない場合，謝金はお支払いできません．ゲームプレイ時間にご注意ください．</li>
+  </ul>
+</div>
+
+<button onclick="location.href='{{ url_for('auth.logout') }}'" style="margin-top: 50px;">ログアウト</button>
+{% endwith %}
+{% endblock %}
